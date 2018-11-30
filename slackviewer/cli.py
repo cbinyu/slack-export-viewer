@@ -40,7 +40,7 @@ def export(archive_dir):
     export_file_info = get_export_info(archive_dir)
     r = Reader(export_file_info["readable_path"])
     channel_list = sorted(
-        [{"channel_name": k, "messages": v} for (k,v) in r.compile_channels().iteritems()],
+        [{"channel_name": k, "messages": v} for (k,v) in r.compile_channels().items()],
         key=lambda d: d["channel_name"]
     )
 
@@ -51,5 +51,5 @@ def export(archive_dir):
         source_file=export_file_info["basename"],
         channels=channel_list
     )
-    outfile = open(export_file_info["stripped_name"] + '.html', 'w')
+    outfile = open(export_file_info["stripped_name"] + '.html', 'wb')
     outfile.write(html.encode('utf-8'))
